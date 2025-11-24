@@ -1,0 +1,97 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import About from "./component/pages/About";
+import Donate from "./component/pages/Donate";
+import News from "./component/pages/News";
+import Newsdetail from "./component/pages/Newsdetail";
+import Layout from "./component/layout/Layout";
+import Error from "./component/pages/Error";
+import Login from "./component/auth/Login";
+import About2 from "./component/pages/About2";
+import Causes from "./component/pages/Causes";
+import Volunter from "./component/pages/Volunter";
+import News1 from "./component/pages/news1";
+import Contact from "./component/pages/Contact";
+import Register from "./component/auth/Register";
+import { ToastContainer } from "react-toastify";
+import Organization from "./component/pages/Organization";
+import AdminLayout from "./component/layout/AdminLayout";
+import OrganiserLayout from "./component/layout/OrganiserLayout";
+import UserLayout from "./component/layout/UserLayout";
+import AddCategory from "./component/admin/AddCategory";
+import AddCampaign from "./component/organiser/AddCampaign";
+import AddRegister from "./component/user/AddRegister";
+import ManageCategory from "./component/admin/ManageCategory";
+import DashBoard from "./component/admin/DashBoard";
+import UpdateCategory from "./component/admin/UpdateCategory";
+import ManageCampaign from "./component/admin/ManageCampaign";
+import DashBoardorg from "./component/organiser/DashBoardorg";
+ import Campaign1 from "./component/organiser/Campaign1";
+import Category from "./component/user/category";
+import ViewDonation from "./component/admin/ViewDonation";
+import UpdateCampaign from "./component/organiser/UpdateCampaign";
+import UserRegister from "./component/user/UserRegister";
+import OrganiserRegister from "./component/organiser/OrganiserRegister";
+import Payment from "./component/user/Payment";             // default export OK
+import ManagePayment from "./component/user/ManagePayments";
+import UserViewDonation from "./component/user/UserViewDonation";
+import OrganiserViewDonation from "./component/organiser/OrganiserViewDonation";
+
+function App() {
+  return (
+    <>
+      <ToastContainer />
+
+      <BrowserRouter>
+        <Routes>
+          {/* Public site under Layout */}
+          <Route path="/" element={<Layout />}>
+            <Route index element={<About />} />
+            <Route path="about" element={<About2 />} />
+            <Route path="causes" element={<Causes />} /> 
+            <Route path="donate" element={<Donate />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="organization" element={<Organization />} />
+            <Route path="category" element={<Category />} />
+            <Route path="category/:catId" element={<Category />} />
+
+            {/* Existing donate route with params (kept) */}
+            <Route path="donate/:campaignId/:organiserId" element={<Payment />} />
+
+            {/* NEW: make /payment work for Causes.jsx Link */}
+            <Route path="payment" element={<Payment />} />
+
+            <Route path="managepayment" element={<ManagePayment />} />
+            <Route path="donation3" element={<UserViewDonation />} />
+          </Route>
+
+          {/* Admin */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<DashBoard />} />
+            <Route path="category/add" element={<AddCategory />} />
+            <Route path="category/manage" element={<ManageCategory />} />
+            <Route path="category/update/:id" element={<UpdateCategory />} />
+            <Route path="managecampaign" element={<ManageCampaign />} />
+            <Route path="viewdonation" element={<ViewDonation />} />
+          </Route>
+
+          {/* Organiser */}
+          <Route path="/organiser" element={<OrganiserLayout />}>
+            <Route index element={<DashBoardorg />} />
+            <Route path="register" element={<OrganiserRegister />} />
+            <Route path="campaign" element={<AddCampaign />} />
+            {/* <Route path="campaign1" element={<Campaign/>}/> */}
+            {/* <Route path="campaign12" element={<Campaign1/>}/> */}
+            <Route path="campaign12" element={<Campaign1 />} />
+            <Route path="campaign/update/:id" element={<UpdateCampaign />} />
+            <Route path="donation2" element={<OrganiserViewDonation />} />
+          </Route>
+
+          {/* Catch-all 404 */}
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+}
+export default App;
